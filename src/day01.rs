@@ -9,9 +9,10 @@ pub fn part1(inp: String) {
     
     let total: u32 = 2020;
     
-    for num in sorted.iter(){
+    for (i,num) in sorted.iter().enumerate(){
+        let (_left,right) = sorted.split_at(i+1);
         let desired_num = total - num;
-        if let Ok(_pos) = sorted.binary_search(&desired_num){
+        if let Ok(_pos) = right.binary_search(&desired_num){
             println!("{}", num * desired_num);
             break;
         }
