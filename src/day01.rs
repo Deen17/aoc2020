@@ -40,7 +40,7 @@ pub fn part2(inp: String){
             let third = desired_num - second;
 
             if let Ok(_pos) = right.binary_search(&third){
-                println!("{}, {}, {}", first, second, third);
+                // println!("{}, {}, {}", first, second, third);
                 println!("{}", first * second * third);
                 return;
             }
