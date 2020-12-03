@@ -13,8 +13,8 @@ pub fn part1(input: String){
 
 pub fn part2(input: String){
     let mut product: usize = 1;
-    for (down, right) in [(1,1), (3,1), (5,1), (7,1), (1,2)].iter(){
-        product *= check_slope(&input, (*down as usize,*right as usize)).0;
+    for (right, down) in [(1,1), (3,1), (5,1), (7,1), (1,2)].iter(){
+        product *= check_slope(&input, (*right as usize,*down as usize)).0;
     }
 
     println!("{}", product);
