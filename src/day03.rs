@@ -29,6 +29,6 @@ pub fn check_slope(input: &String, step: (usize,usize)) -> (usize,usize){
             count += if x == '#' {1} else {0};
             return (count, (pos + step.0) % 31)
         });
-    println!("{:?}", res);
+    // println!("{:?}", res);
     return res;
 }
