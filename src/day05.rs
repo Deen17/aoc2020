@@ -5,7 +5,10 @@ pub fn part1(input: String){
     let res= input
         .lines()
         .map(|x| 
-                isize::from_str_radix(x.chars().map(|y| if y == 'F' || y == 'L' {'0'} else {'1'}).collect::<String>().as_str(),2).unwrap(),
+            x.
+                chars()
+                .fold(0, 
+                    |y, item| (y<<1) + ((item == 'B' || item == 'R') as isize))
         )
         .max().unwrap();
     println!("max: {}", res);
@@ -16,7 +19,11 @@ pub fn part2(input: String){
     let res= input
         .lines()
         .map(|x| 
-                isize::from_str_radix(x.chars().map(|y| if y == 'F' || y == 'L' {'0'} else {'1'}).collect::<String>().as_str(),2).unwrap())
+            x.
+                chars()
+                .fold(0, 
+                    |y, item| (y<<1) + ((item == 'B' || item == 'R') as isize))
+        )
         .map(|x| seats.remove(&x));
     for _ in res{}
     println!("seats: {:?}", seats);
