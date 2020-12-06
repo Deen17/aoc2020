@@ -1,6 +1,6 @@
 use std::collections::HashSet;
 
-type charset<'a> = HashSet< char>;
+type CharSet<'a> = HashSet< char>;
 
 pub fn part1(input: String){
     let res: usize= input
@@ -22,7 +22,7 @@ pub fn part2(input: String){
         .map(|x: &str| 
             x
                 .lines()
-                .fold((charset::new(), 0), 
+                .fold((CharSet::new(), 0), 
                     |(y, count), item|
                         {
                             // let mut this = HashSet::from_iter(item.chars());
