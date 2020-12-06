@@ -1,6 +1,3 @@
-use std::collections::HashSet;
-
-type CharSet<'a> = HashSet< char>;
 
 pub fn part1(input: String){
     let res: usize= input
@@ -8,9 +5,9 @@ pub fn part1(input: String){
         .map(|x| 
             x
                 .chars()
-                .fold(HashSet::new(), 
-                    |mut y, item| {if item.is_alphabetic(){ y.insert(item);} y})
-                .len()
+                .fold(0u32, 
+                    |y, item| if item.is_alphabetic() {y | (1u32 << (item as usize - 96))} else {y})
+                .count_ones() as usize
         )
         .sum();
     println!("sum: {}", res);
@@ -22,25 +19,19 @@ pub fn part2(input: String){
         .map(|x: &str| 
             x
                 .lines()
-                .fold((CharSet::new(), 0), 
-                    |(y, count), item|
+                .fold(0x3FF_FFFFu32, 
+                    |set, item|
                         {
-                            // let mut this = HashSet::from_iter(item.chars());
-                            let mut set: HashSet<char> = HashSet::new();
+                            let mut cur = 0u32;
                             for i in item.chars(){
-                                set.insert(i);
+                                if i.is_alphabetic(){
+                                    cur |= 1u32 << (i as usize - 96);
+                                }
                             }
-                            set.retain(|x| x.is_alphabetic());
-                            if count == 0{
-                                return (set, count+1)
-                            }
-                            else {
-                                (y.intersection(&set).map(|x| x.to_owned()).collect(),count+1)
-                            }
-                            
+                            set & cur
                         }
-                ).0
-                .len()
+                )
+                .count_ones() as usize
         )
         .sum();
     println!("sum: {}", res);
